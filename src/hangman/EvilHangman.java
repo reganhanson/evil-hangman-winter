@@ -27,9 +27,9 @@ public class EvilHangman {
         }
 
         File dictionaryFile = new File(dictionaryFileName);
-        EvilHangmanGame newGame = new EvilHangmanGame();
+        EvilHangmanGame myGame = new EvilHangmanGame();
         try {
-            newGame.startGame(dictionaryFile, wordLength);
+            myGame.startGame(dictionaryFile, wordLength);
         } catch (IOException | EmptyDictionaryException e) {
             e.printStackTrace();
         }
@@ -37,20 +37,27 @@ public class EvilHangman {
         Scanner scan = new Scanner(System.in);
 
         // user input loop
-        for (int i = 0; i < numGuesses; i++) {
+        for (int i = numGuesses; i > 0; i--) {
             System.out.printf("You have %d guesses left\n", numGuesses);
-            System.out.printf("Used letters: %s\n", newGame.getGuessedLetters().toString());
+            System.out.printf("Used letters: %s\n", myGame.getGuessedLetters().toString());
             System.out.print("Word: ");
             // print key
             System.out.println("Enter guess: ");
-            char guess = scan.next().charAt(0);
             try {
-                newGame.makeGuess(guess);
-            } catch(GuessAlreadyMadeException g) {
-                System.out.printf("You have already guessed %c!\n", guess);
-                i--;
+                char guess = scan.next().charAt(0);
+                if (!Character.isLetter(guess)) {
+                    throw new IOException();
+                }
+                myGame.makeGuess(guess);
+            } catch (GuessAlreadyMadeException e) {
+                System.out.println("You have already guessed this letter");
+                i++;
+            } catch (IOException e) {
+                System.out.println("Not a valid letter");
+                i++;
             }
         }
+        System.out.printf("The word was: %s", myGame.dictionary.iterator().next());
     }
 
 }

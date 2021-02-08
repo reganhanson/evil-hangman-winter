@@ -11,7 +11,7 @@ public class EvilHangmanGame implements IEvilHangmanGame{
     // static variables
     // variables
     private int wordSize;
-    private Set<String> dictionary;
+    public Set<String> dictionary;
     private SortedSet<Character> guessedLetters;
 
     // constructors
