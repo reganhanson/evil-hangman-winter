@@ -14,7 +14,7 @@ public class EvilHangman {
         String error = null;
 
         try {
-            if (numGuesses <= 0) {
+            if (numGuesses < 1) {
                 error = "Invalid number of guesses";
                 throw new IOException();
             }
@@ -53,7 +53,7 @@ public class EvilHangman {
                 System.out.println("You have already guessed this letter");
                 i++;
             } catch (IOException e) {
-                System.out.println("Not a valid letter");
+                System.out.println("Invalid input");
                 i++;
             }
         }

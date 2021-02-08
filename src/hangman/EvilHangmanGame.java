@@ -27,7 +27,6 @@ public class EvilHangmanGame implements IEvilHangmanGame{
         Scanner scanFile = new Scanner(dictionary);
         this.wordSize = wordLength;
 
-        // create dictionary with given text file
         while (scanFile.hasNext()) {
             String nextWord = scanFile.next();
             if (nextWord.length() == this.wordSize) {
