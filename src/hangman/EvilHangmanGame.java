@@ -11,8 +11,8 @@ public class EvilHangmanGame implements IEvilHangmanGame{
     // static variables
     // variables
     private int wordSize;
-    Set<String> dictionary;
-    SortedSet<Character> guessedLetters;
+    private Set<String> dictionary;
+    private SortedSet<Character> guessedLetters;
 
     // constructors
     public EvilHangmanGame() {
@@ -26,10 +26,6 @@ public class EvilHangmanGame implements IEvilHangmanGame{
     public void startGame(File dictionary, int wordLength) throws IOException, EmptyDictionaryException {
         Scanner scanFile = new Scanner(dictionary);
         this.wordSize = wordLength;
-
-        if (this.wordSize < 2) {
-            throw new IOException();
-        }
 
         // create dictionary with given text file
         while (scanFile.hasNext()) {

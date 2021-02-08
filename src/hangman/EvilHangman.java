@@ -11,13 +11,19 @@ public class EvilHangman {
         int wordLength = Integer.parseInt(args[1]);
         int numGuesses = Integer.parseInt(args[2]);
 
+        String error = null;
+
         try {
             if (numGuesses <= 0) {
-                System.out.println("Invalid number of guesses");
+                error = "Invalid number of guesses";
+                throw new IOException();
+            }
+            if (wordLength < 2) {
+                error = "Invalid length of word";
                 throw new IOException();
             }
         } catch(IOException e)  {
-            e.printStackTrace();
+            System.out.println(error);
         }
 
         File dictionaryFile = new File(dictionaryFileName);
@@ -32,15 +38,17 @@ public class EvilHangman {
 
         // user input loop
         for (int i = 0; i < numGuesses; i++) {
-            System.out.printf("You have %d guesses left", numGuesses);
-            System.out.print("Used letters: ");
+            System.out.printf("You have %d guesses left\n", numGuesses);
+            System.out.printf("Used letters: %s\n", newGame.getGuessedLetters().toString());
             System.out.print("Word: ");
+            // print key
             System.out.println("Enter guess: ");
             char guess = scan.next().charAt(0);
             try {
                 newGame.makeGuess(guess);
             } catch(GuessAlreadyMadeException g) {
-                g.printStackTrace();
+                System.out.printf("You have already guessed %c!\n", guess);
+                i--;
             }
         }
     }
