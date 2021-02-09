@@ -40,6 +40,11 @@ public class EvilHangmanGame implements IEvilHangmanGame{
 
     @Override
     public Set<String> makeGuess(char guess) throws GuessAlreadyMadeException {
+        guess = Character.toLowerCase(guess);
+        if (this.guessedLetters.contains(guess)) {
+            throw new GuessAlreadyMadeException();
+        }
+        this.guessedLetters.add(guess);
         return null;
     }
 

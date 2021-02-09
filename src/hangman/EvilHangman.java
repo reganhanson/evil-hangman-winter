@@ -38,7 +38,7 @@ public class EvilHangman {
 
         // user input loop
         for (int i = numGuesses; i > 0; i--) {
-            System.out.printf("You have %d guesses left\n", numGuesses);
+            System.out.printf("You have %d guesses left\n", i);
             System.out.printf("Used letters: %s\n", myGame.getGuessedLetters().toString());
             System.out.print("Word: ");
             // print key
